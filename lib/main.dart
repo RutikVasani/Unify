@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_application_1/drawer_manager/Sylleabus.dart';
+import 'package:flutter_application_1/drawer_manager/assignment.dart';
+import 'package:flutter_application_1/drawer_manager/notice_board.dart';
+import 'package:flutter_application_1/drawer_manager/polling.dart';
+import 'package:flutter_application_1/drawer_manager/resume.dart';
+import 'package:flutter_application_1/drawer_manager/setting.dart';
 import 'package:flutter_application_1/pages/forgot_page.dart';
 import 'package:flutter_application_1/pages/login_page.dart';
 import 'package:flutter_application_1/pages/main_page.dart';
@@ -7,6 +14,8 @@ import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
 }
 
@@ -26,6 +35,12 @@ class MyApp extends StatelessWidget {
         MyRoutes.splashroutes: (context) => SplashScreen(),
         MyRoutes.forgotroutes: (context) => ForgotPassword(),
         MyRoutes.mainpageroutes: (context) => MainPage(),
+        MyRoutes.assignmentroutes: (context) => Assignment(),
+        MyRoutes.noticeboardroutes: (context) => NoticeBoard(),
+        MyRoutes.pollingroutes: (context) => Polling(),
+        MyRoutes.resumeroutes: (context) => Resume(),
+        MyRoutes.settingroutes: (context) => Setting(),
+        MyRoutes.sylleabusroutes: (context) => Sylleabus(),
       },
     );
   }

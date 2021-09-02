@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/drawer.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -6,17 +7,63 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String name = "";
-  bool changeButton = false;
-
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Center(
-          child: Text(
-        "main page",
-        style: TextStyle(color: Colors.black, fontSize: 30),
-      )),
-    );
-  }
+  Widget build(BuildContext context) => DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: (context, innerBoxScrolled) => [
+              SliverAppBar(
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                pinned: true,
+                floating: true,
+                snap: true,
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {},
+                    color: Colors.white,
+                  ),
+                ],
+                title: Text(
+                  "Unify",
+                  style: TextStyle(fontSize: 23, color: Colors.white),
+                ),
+                // backgroundColor: Colors.blue,
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                    Colors.indigo.shade800,
+                    Colors.blue.shade500,
+                  ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
+                ),
+                bottom: TabBar(
+                    indicatorColor: Colors.blue.shade300,
+                    indicatorWeight: 5,
+                    tabs: [
+                      Tab(text: 'CHATS'),
+                      Tab(text: 'CALENDER'),
+                      Tab(text: 'QUERY')
+                    ]),
+                titleSpacing: 0,
+                elevation: 20,
+              ),
+            ],
+            body: TabBarView(children: [
+              buildPage('Chat Page'),
+              buildPage('Celender'),
+              buildPage('query')
+            ]),
+          ),
+          drawer: MyDrawer(),
+        ),
+      );
 }
+
+Widget buildPage(String text) => Center(
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 30),
+      ),
+    );
