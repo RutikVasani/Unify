@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "710991940848",
+    "project_id": "unify-b95f5",
+    "storage_bucket": "unify-b95f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710991940848:android:813aea31e819662eb94635",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710991940848-6h8t5ncs5kjehaco0psc239kjiv42vlc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdfZwaXH7C4LpaKwCRe-HCS59XnDWAj2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710991940848-6h8t5ncs5kjehaco0psc239kjiv42vlc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
