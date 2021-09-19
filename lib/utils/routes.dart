@@ -8,5 +8,8 @@ class MyRoutes {
   static String pollingroutes = "/polling";
   static String resumeroutes = "/resume";
   static String settingroutes = "/setting";
-  static String sylleabusroutes = "/sylleabus";
+  static String syllabusroutes = "/syllabus";
+  static String chatroutes = "/chats";
+  static String calenderroutes = "/calender";
+  static String queryroutes = "/query";
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/drawer_manager/Sylleabus.dart';
+import 'package:flutter_application_1/Tabs/chats.dart';
+import 'package:flutter_application_1/Tabs/query.dart';
+import 'package:flutter_application_1/drawer_manager/Syllabus.dart';
 import 'package:flutter_application_1/drawer_manager/assignment.dart';
 import 'package:flutter_application_1/drawer_manager/notice_board.dart';
 import 'package:flutter_application_1/drawer_manager/polling.dart';
@@ -12,6 +14,8 @@ import 'package:flutter_application_1/pages/main_page.dart';
 import 'package:flutter_application_1/pages/splash_screen.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
+
+import 'Tabs/calender.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/splash",
+      initialRoute: MyRoutes.mainpageroutes,
       routes: {
         "/splash": (context) => SplashScreen(),
         MyRoutes.loginroutes: (context) => LoginPage(),
@@ -40,7 +44,10 @@ class MyApp extends StatelessWidget {
         MyRoutes.pollingroutes: (context) => Polling(),
         MyRoutes.resumeroutes: (context) => Resume(),
         MyRoutes.settingroutes: (context) => Setting(),
-        MyRoutes.sylleabusroutes: (context) => Sylleabus(),
+        MyRoutes.syllabusroutes: (context) => Syllabus(),
+        MyRoutes.chatroutes: (context) => Chats(),
+        MyRoutes.calenderroutes: (context) => Calender(),
+        MyRoutes.queryroutes: (context) => Query(),
       },
     );
   }
