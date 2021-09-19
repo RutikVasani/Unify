@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// <<<<<<< Updated upstream
 import 'package:flutter_application_1/Tabs/chats.dart';
 import 'package:flutter_application_1/Tabs/query.dart';
 import 'package:flutter_application_1/drawer_manager/Syllabus.dart';
+// =======
+// // <<<<<<< HEAD
+// // =======
+
+// >>>>>>> SACHIN
+// >>>>>>> Stashed changes
 import 'package:flutter_application_1/drawer_manager/assignment.dart';
 import 'package:flutter_application_1/drawer_manager/notice_board.dart';
 import 'package:flutter_application_1/drawer_manager/polling.dart';
@@ -44,10 +51,19 @@ class MyApp extends StatelessWidget {
         MyRoutes.pollingroutes: (context) => Polling(),
         MyRoutes.resumeroutes: (context) => Resume(),
         MyRoutes.settingroutes: (context) => Setting(),
+// <<<<<<< Updated upstream
+// =======
+// // <<<<<<< HEAD
+// // =======
+// >>>>>>> Stashed changes
         MyRoutes.syllabusroutes: (context) => Syllabus(),
         MyRoutes.chatroutes: (context) => Chats(),
         MyRoutes.calenderroutes: (context) => Calender(),
         MyRoutes.queryroutes: (context) => Query(),
+// <<<<<<< Updated upstream
+// =======
+// // >>>>>>> SACHIN
+// >>>>>>> Stashed changes
       },
     );
   }
