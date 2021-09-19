@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                     child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 110),
-                  child: Row(
+                  child: Column(
                     children: [
                       Text(
                         "Team VSR ",

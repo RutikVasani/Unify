@@ -119,6 +119,18 @@ class MyDrawer extends StatelessWidget {
                   )),
               onTap: () => Navigator.pushNamed(context, MyRoutes.settingroutes),
             ),
+            ListTile(
+              leading: Icon(
+                CupertinoIcons.zoom_out,
+                color: Colors.white,
+              ),
+              title: Text("Logout",
+                  textScaleFactor: 1.4,
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+              onTap: () => Navigator.pushNamed(context, MyRoutes.loginroutes),
+            ),
           ],
         ),
       ),
