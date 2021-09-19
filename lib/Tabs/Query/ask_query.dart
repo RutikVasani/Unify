@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 
-class Query extends StatefulWidget {
-  const Query({Key? key}) : super(key: key);
+class AskQuery extends StatefulWidget {
+  const AskQuery({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _QueryState();
+  State<StatefulWidget> createState() => _AskQueryState();
 }
 
-class _QueryState extends State<Query> {
+class _AskQueryState extends State<AskQuery> {
   String name = "";
   bool changeButton = false;
 
@@ -20,7 +20,7 @@ class _QueryState extends State<Query> {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.mainpageroutes);
+      await Navigator.pushNamed(context, MyRoutes.querySubmittedroutes);
       setState(() {
         changeButton = false;
       });
@@ -53,8 +53,22 @@ class _QueryState extends State<Query> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Ask your Query",
+          style: TextStyle(fontSize: 23, color: Colors.white),
+        ),
+        // backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+            Colors.indigo.shade800,
+            Colors.blue.shade500,
+          ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
+        ),
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
           key: _formKey2,
@@ -214,60 +228,6 @@ class _QueryState extends State<Query> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class PasswordField extends StatefulWidget {
-  const PasswordField({
-    this.fieldKey,
-    this.hintText,
-    this.labelText,
-    this.helperText,
-    this.onSaved,
-    this.validator,
-    this.onFieldSubmitted,
-  });
-
-  final Key? fieldKey;
-  final String? hintText;
-  final String? labelText;
-  final String? helperText;
-  final FormFieldSetter<String>? onSaved;
-  final FormFieldValidator<String>? validator;
-  final ValueChanged<String>? onFieldSubmitted;
-
-  @override
-  _PasswordFieldState createState() => _PasswordFieldState();
-}
-
-class _PasswordFieldState extends State<PasswordField> {
-  bool _obscureText = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      key: widget.fieldKey,
-      obscureText: _obscureText,
-      maxLength: 8,
-      onSaved: widget.onSaved,
-      validator: widget.validator,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      decoration: InputDecoration(
-        border: const UnderlineInputBorder(),
-        filled: true,
-        hintText: widget.hintText,
-        labelText: widget.labelText,
-        helperText: widget.helperText,
-        suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-          child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
         ),
       ),
     );
