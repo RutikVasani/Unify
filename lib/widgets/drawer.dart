@@ -7,6 +7,8 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl =
+        "https://w7.pngwing.com/pngs/971/990/png-transparent-computer-icons-login-person-user-pessoa-smiley-desktop-wallpaper-address-icon.png";
     return Drawer(
       child: Container(
         color: Colors.blue,
@@ -29,6 +31,8 @@ class MyDrawer extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                currentAccountPicture:
+                    CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
               ),
             ),
             ListTile(
@@ -49,7 +53,7 @@ class MyDrawer extends StatelessWidget {
                 CupertinoIcons.news,
                 color: Colors.white,
               ),
-              title: Text("Notice board",
+              title: Text("Notice Board",
                   textScaleFactor: 1.4,
                   style: TextStyle(
                     color: Colors.white,
@@ -72,10 +76,10 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                CupertinoIcons.paperplane,
+                CupertinoIcons.hand_raised_fill,
                 color: Colors.white,
               ),
-              title: Text("polling",
+              title: Text("Polling",
                   textScaleFactor: 1.4,
                   style: TextStyle(
                     color: Colors.white,
@@ -84,16 +88,16 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                CupertinoIcons.drop,
+                CupertinoIcons.book_fill,
                 color: Colors.white,
               ),
-              title: Text("Sylleabus",
+              title: Text("Syllabus",
                   textScaleFactor: 1.4,
                   style: TextStyle(
                     color: Colors.white,
                   )),
               onTap: () =>
-                  Navigator.pushNamed(context, MyRoutes.sylleabusroutes),
+                  Navigator.pushNamed(context, MyRoutes.syllabusroutes),
             ),
             ListTile(
               leading: Icon(
@@ -112,7 +116,7 @@ class MyDrawer extends StatelessWidget {
                 CupertinoIcons.settings,
                 color: Colors.white,
               ),
-              title: Text("Setting",
+              title: Text("Settings",
                   textScaleFactor: 1.4,
                   style: TextStyle(
                     color: Colors.white,
