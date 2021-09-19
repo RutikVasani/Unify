@@ -11,5 +11,6 @@ class MyRoutes {
   static String syllabusroutes = "/syllabus";
   static String chatroutes = "/chats";
   static String calenderroutes = "/calender";
-  static String queryroutes = "/query";
+  static String askqueryroutes = "/askquery";
+  static String querySubmittedroutes = "/querySubmitted";
 }
