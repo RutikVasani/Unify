@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.querySubmittedroutes,
+      initialRoute: "/spash",
       routes: {
         "/splash": (context) => SplashScreen(),
         MyRoutes.loginroutes: (context) => LoginPage(),
