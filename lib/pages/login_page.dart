@@ -8,6 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
   String name = "";
   bool changeButton = false;
 
@@ -177,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                     child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 110),
-                  child: Row(
+                  child: Column(
                     children: [
                       Text(
                         "Team VSR ",
