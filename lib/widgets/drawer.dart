@@ -1,14 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/provider/google_sign_in.dart';
 import 'package:flutter_application_1/utils/routes.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
-
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    final imageUrl =
-        "https://w7.pngwing.com/pngs/971/990/png-transparent-computer-icons-login-person-user-pessoa-smiley-desktop-wallpaper-address-icon.png";
     return Drawer(
       child: Container(
         color: Colors.blue,
@@ -16,25 +16,15 @@ class MyDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: UserAccountsDrawerHeader(
-                margin: EdgeInsets.zero,
-                accountName: Text(
-                  "Rutik",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                accountEmail: Text(
-                  "rutikvasani370@gmail.com",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                currentAccountPicture:
-                    CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
-              ),
-            ),
+                padding: EdgeInsets.zero,
+                child: UserAccountsDrawerHeader(
+                  margin: EdgeInsets.zero,
+                  decoration: BoxDecoration(color: Colors.red.shade300),
+                  accountName: Text(user.displayName!),
+                  accountEmail: Text(user.email!),
+                  currentAccountPicture: CircleAvatar(
+                      backgroundImage: NetworkImage(user.photoURL!)),
+                )),
             ListTile(
               leading: Icon(
                 CupertinoIcons.home,
@@ -124,17 +114,20 @@ class MyDrawer extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, MyRoutes.settingroutes),
             ),
             ListTile(
-              leading: Icon(
-                CupertinoIcons.zoom_out,
-                color: Colors.white,
-              ),
-              title: Text("Logout",
-                  textScaleFactor: 1.4,
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              onTap: () => Navigator.pushNamed(context, MyRoutes.loginroutes),
-            ),
+                leading: Icon(
+                  CupertinoIcons.zoom_out,
+                  color: Colors.white,
+                ),
+                title: Text("Logout",
+                    textScaleFactor: 1.4,
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                onTap: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.logout();
+                }),
           ],
         ),
       ),
