@@ -1,12 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/provider/google_sign_in.dart';
+// import 'package:flutter_application_1/provider/google_sign_in.dart';
 import 'package:flutter_application_1/utils/routes.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
-  final user = FirebaseAuth.instance.currentUser!;
+  // final user = FirebaseAuth.instance.currentUser!;
+  final imageUrl =
+      "https://w7.pngwing.com/pngs/971/990/png-transparent-computer-icons-login-person-user-pessoa-smiley-desktop-wallpaper-address-icon.png";
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,28 +18,29 @@ class MyDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-                padding: EdgeInsets.zero,
-                child: UserAccountsDrawerHeader(
+              padding: EdgeInsets.zero,
+              child: UserAccountsDrawerHeader(
                   margin: EdgeInsets.zero,
                   decoration: BoxDecoration(color: Colors.red.shade300),
-                  accountName: Text(user.displayName!),
-                  accountEmail: Text(user.email!),
+                  accountName: Text('Sachin Solanki'),
+                  accountEmail: Text('sachinds501@gmail.com'),
                   currentAccountPicture: CircleAvatar(
-                      backgroundImage: NetworkImage(user.photoURL!)),
-                )),
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.home,
-                color: Colors.white,
-              ),
-              title: Text("Home",
-                  textScaleFactor: 1.4,
-                  style: TextStyle(
-                    color: Colors.white,
+                    backgroundImage: NetworkImage(imageUrl),
                   )),
-              onTap: () =>
-                  Navigator.pushNamed(context, MyRoutes.mainpageroutes),
             ),
+            // ListTile(
+            //   leading: Icon(
+            //     CupertinoIcons.home,
+            //     color: Colors.white,
+            //   ),
+            //   title: Text("Home",
+            //       textScaleFactor: 1.4,
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //       )),
+            //   onTap: () =>
+            //       Navigator.pushNamed(context, MyRoutes.mainpageroutes),
+            // ),
             ListTile(
               leading: Icon(
                 CupertinoIcons.news,
@@ -124,9 +127,9 @@ class MyDrawer extends StatelessWidget {
                       color: Colors.white,
                     )),
                 onTap: () {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.logout();
+                  // final provider =
+                  //     Provider.of<GoogleSignInProvider>(context, listen: false);
+                  // provider.logout();
                 }),
           ],
         ),

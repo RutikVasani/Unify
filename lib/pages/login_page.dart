@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/provider/google_sign_in.dart';
+// import 'package:flutter_application_1/provider/google_sign_in.dart';
 import 'package:flutter_application_1/utils/routes.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -166,29 +166,29 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.red,
-                                onPrimary: Colors.white,
-                                minimumSize: Size(250, 45),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                )),
-                            icon: FaIcon(FontAwesomeIcons.google),
-                            onPressed: () {
-                              final provider =
-                                  Provider.of<GoogleSignInProvider>(context,
-                                      listen: false);
-                              provider.googleLogin();
-                            },
-                            label: const Text(
-                              'SignIn with Google',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          // ElevatedButton.icon(
+                          //   style: ElevatedButton.styleFrom(
+                          //       primary: Colors.red,
+                          //       onPrimary: Colors.white,
+                          //       minimumSize: Size(250, 45),
+                          //       shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       )),
+                          //   icon: FaIcon(FontAwesomeIcons.google),
+                          //   onPressed: () {
+                          //     final provider =
+                          //         Provider.of<GoogleSignInProvider>(context,
+                          //             listen: false);
+                          //     provider.googleLogin();
+                          //   },
+                          //   label: const Text(
+                          //     'SignIn with Google',
+                          //     style: TextStyle(fontSize: 16),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

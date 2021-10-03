@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Tabs/chats.dart';
@@ -14,17 +14,17 @@ import 'package:flutter_application_1/pages/forgot_page.dart';
 import 'package:flutter_application_1/pages/login_page.dart';
 import 'package:flutter_application_1/pages/main_page.dart';
 import 'package:flutter_application_1/pages/splash_screen.dart';
-import 'package:flutter_application_1/provider/google_sign_in.dart';
+// import 'package:flutter_application_1/provider/google_sign_in.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import 'Tabs/Query/query_sumitted.dart';
 import 'Tabs/calender.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
@@ -33,32 +33,29 @@ Future main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
-        child: MaterialApp(
-          themeMode: ThemeMode.light,
-          theme: MyTheme.lightTheme(context),
-          darkTheme: MyTheme.darkTheme(context),
-          debugShowCheckedModeBanner: false,
-          initialRoute: MyRoutes.loginroutes,
-          routes: {
-            "/splash": (context) => SplashScreen(),
-            MyRoutes.loginroutes: (context) => LoginPage(),
-            MyRoutes.splashroutes: (context) => SplashScreen(),
-            MyRoutes.forgotroutes: (context) => ForgotPassword(),
-            MyRoutes.mainpageroutes: (context) => MainPage(),
-            MyRoutes.assignmentroutes: (context) => Assignment(),
-            MyRoutes.noticeboardroutes: (context) => NoticeBoard(),
-            MyRoutes.pollingroutes: (context) => Polling(),
-            MyRoutes.resumeroutes: (context) => Resume(),
-            MyRoutes.settingroutes: (context) => Setting(),
-            MyRoutes.syllabusroutes: (context) => Syllabus(),
-            MyRoutes.chatroutes: (context) => Chats(),
-            MyRoutes.calenderroutes: (context) => Calender(),
-            MyRoutes.askqueryroutes: (context) => AskQuery(),
-            MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
-            MyRoutes.snapshotroutes: (context) => Snapshot(),
-          },
-        ),
+  Widget build(BuildContext context) => MaterialApp(
+        themeMode: ThemeMode.light,
+        theme: MyTheme.lightTheme(context),
+        darkTheme: MyTheme.darkTheme(context),
+        debugShowCheckedModeBanner: false,
+        initialRoute: MyRoutes.loginroutes,
+        routes: {
+          "/splash": (context) => SplashScreen(),
+          MyRoutes.loginroutes: (context) => LoginPage(),
+          MyRoutes.splashroutes: (context) => SplashScreen(),
+          MyRoutes.forgotroutes: (context) => ForgotPassword(),
+          MyRoutes.mainpageroutes: (context) => MainPage(),
+          MyRoutes.assignmentroutes: (context) => Assignment(),
+          MyRoutes.noticeboardroutes: (context) => NoticeBoard(),
+          MyRoutes.pollingroutes: (context) => Polling(),
+          MyRoutes.resumeroutes: (context) => Resume(),
+          MyRoutes.settingroutes: (context) => Setting(),
+          MyRoutes.syllabusroutes: (context) => Syllabus(),
+          MyRoutes.chatroutes: (context) => Chats(),
+          MyRoutes.calenderroutes: (context) => Calender(),
+          MyRoutes.askqueryroutes: (context) => AskQuery(),
+          MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
+          MyRoutes.snapshotroutes: (context) => Snapshot(),
+        },
       );
 }
