@@ -194,34 +194,35 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 152,
-                ),
-                Container(
-                  // height: 60,
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 110),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Team VSR ",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "x ",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        ),
-                        Text(
-                          "2021 ",
-                          style: TextStyle(color: Colors.blue, fontSize: 20),
-                        ),
-                      ],
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 152,
                     ),
-                  )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Text(
+                        "Team VSR x ",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "2021 ",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
