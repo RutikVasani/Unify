@@ -14,13 +14,15 @@ import 'package:flutter_application_1/pages/main_page.dart';
 import 'package:flutter_application_1/pages/splash_screen.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'Tabs/Query/query_sumitted.dart';
 import 'Tabs/calender.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
+  statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
 }
 

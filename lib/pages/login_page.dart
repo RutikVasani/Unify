@@ -1,6 +1,16 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utils/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'main_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+  ));
+}
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,200 +19,133 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   
-  String name = "";
-  bool changeButton = false;
-
   final _formKey = GlobalKey<FormState>();
-  moveToHome(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        changeButton = true;
-      });
-      await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.mainpageroutes);
-      setState(() {
-        changeButton = false;
-      });
+  late String txtemail, txtpassword;
+
+  // ignore: non_constant_identifier_names
+  final DatabaseReference = FirebaseDatabase.instance.reference().child("Users");
+  final _auth = FirebaseAuth.instance;
+
+  void _signIn() async {
+    try {
+      final newUser = await _auth.signInWithEmailAndPassword(
+        email: txtemail, password: txtpassword);
+
+      // ignore: unnecessary_null_comparison
+      if (newUser != null) {
+        Navigator.pushReplacement(
+         context, MaterialPageRoute(builder: (context) => MainPage()));
+      } else {
+        print('fail');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Container(child: Image.asset("assets/images/login.gif")),
-              Center(
+    return SafeArea(
+        child: Scaffold(
+      backgroundColor: Colors.blue,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: SingleChildScrollView(
                 child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.4,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40)),
-                    boxShadow: [
-                      //BoxShadow
-                      BoxShadow(
-                        color: Colors.blue.shade200,
-                        offset: const Offset(0.0, 5.0),
-                        blurRadius: 10.0,
-                        spreadRadius: 3.0,
-                      ), //BoxShadow
-                    ],
-                  ),
-                  width: 200,
-                  height: 70,
-                  child: Center(
-                    child: Text(
-                      "Welcome",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 32.0),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Enter Username",
-                            labelText: "Username",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Username cannot be empty";
-                            }
-                            return null;
-                          },
-                          onChanged: (value) {
-                            name = value;
-                            setState(() {});
-                          },
-                        ),
-                        TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: "Enter Password",
-                              labelText: "Password",
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Password cannot be empty";
-                              } else if (value.length < 8) {
-                                return "Password must have 8 characters";
-                              }
-                              return null;
-                            }),
                         SizedBox(
                           height: 30,
                         ),
-                        TextButton(
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                        TextFormField(
+                          decoration: InputDecoration(
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.mail,
+                                color: Colors.black,
+                              ),
                             ),
+                            labelText: 'username',
                           ),
-                          onPressed: () => Navigator.pushNamed(
-                              context, MyRoutes.forgotroutes),
+                          onSaved: (value) {
+                            txtemail = value!;
+                          },
+                          validator: validateEmail,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.lock,
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'password',
+                          ),
+                          onSaved: (value) {
+                            txtpassword = value!;
+                          },
+                          validator: validatePassword,
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 70,
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.blue.shade800,
-                                  Colors.blue.shade300,
-                                  Colors.blue.shade800,
-                                ],
-                                begin: FractionalOffset.centerLeft,
-                                end: FractionalOffset.centerRight,
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(changeButton ? 50 : 8)),
-                          child: Material(
-                            color: Colors.white.withOpacity(0),
-                            // borderRadius:
-                            // BorderRadius.circular(changeButton ? 50 : 8),
-                            child: InkWell(
-                              onTap: () => moveToHome(context),
-                              child: AnimatedContainer(
-                                duration: Duration(seconds: 1),
-                                height: 50,
-                                width: changeButton ? 50 : 180,
-                                alignment: Alignment.center,
-                                child: changeButton
-                                    ? Icon(
-                                        Icons.done,
-                                        color: Colors.white,
-                                      )
-                                    : Text("Login",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            color: Colors.white)),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      _signIn();
+                                    }
+                                  },
+                                  child: Text('Login'),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 152,
-              ),
-              Container(
-                // height: 60,
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 110),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Team VSR ",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "x ",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      Text(
-                        "2021 ",
-                        style: TextStyle(color: Colors.blue, fontSize: 20),
-                      ),
-                    ],
-                  ),
-                )),
-              ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
-    );
+    ));
+  }
+
+  String? validateEmail(String? email) {
+    if (email!.isEmpty) {
+      return 'Enter email address';
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePassword(String? password) {
+    if (password!.isEmpty) {
+      return 'Enter email address';
+    } else {
+      return null;
+    }
   }
 }
