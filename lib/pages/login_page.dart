@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_application_1/main.dart';
 import 'main_page.dart';
 
 
@@ -17,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // ignore: non_constant_identifier_names
   final DatabaseReference user = FirebaseDatabase.instance.reference().child("Users");
+  final databaseRef = FirebaseDatabase.instance.reference();
   final _auth = FirebaseAuth.instance;
 
   void _signIn() async {
@@ -26,11 +26,11 @@ class _LoginPageState extends State<LoginPage> {
 
       // ignore: unnecessary_null_comparison
       if (newUser != null) {
-        Map userDataMap = {
-          "name": txtemail.trim(),
-        };
 
-       userref.child(User.uid).set(userDataMap);
+        final user = FirebaseAuth.instance.currentUser;
+        final userId = user!.uid;
+
+        _addUsers(userId);
 
         Navigator.pushReplacement(
          context, MaterialPageRoute(builder: (context) => MainPage()));
@@ -40,6 +40,11 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  // ignore: non_constant_identifier_names
+  void _addUsers(String Id) {
+    databaseRef.push().set({'name': txtemail,});
   }
 
   @override
