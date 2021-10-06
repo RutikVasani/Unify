@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Tabs/chats.dart';
 import 'package:flutter_application_1/Tabs/Query/ask_query.dart';
 import 'package:flutter_application_1/drawer_manager/Syllabus.dart';
@@ -15,16 +14,17 @@ import 'package:flutter_application_1/pages/splash_screen.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'Tabs/Query/query_sumitted.dart';
 import 'Tabs/calender.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
 }
+
+DatabaseReference userref = FirebaseDatabase.instance.reference().child("users");
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
