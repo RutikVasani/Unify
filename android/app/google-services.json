@@ -1,7 +1,6 @@
 {
   "project_info": {
     "project_number": "710991940848",
-    "firebase_url": "https://unify-b95f5-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "unify-b95f5",
     "storage_bucket": "unify-b95f5.appspot.com"
   },
@@ -14,14 +13,6 @@
         }
       },
       "oauth_client": [
-        {
-          "client_id": "710991940848-mec75tsaah2g6rjrttuimh8qpc1vcavg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.flutter_application_1",
-            "certificate_hash": "2de192eb709ea23cbd85ec93029cc0fa09d5b9cb"
-          }
-        },
         {
           "client_id": "710991940848-6h8t5ncs5kjehaco0psc239kjiv42vlc.apps.googleusercontent.com",
           "client_type": 3
