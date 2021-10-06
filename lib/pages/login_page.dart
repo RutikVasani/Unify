@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   late String txtemail, txtpassword;
 
   // ignore: non_constant_identifier_names
-  final DatabaseReference user = FirebaseDatabase.instance.reference().child("Users");
+  final DatabaseReference user = FirebaseDatabase.instance.reference().child("users");
   final databaseRef = FirebaseDatabase.instance.reference();
   final _auth = FirebaseAuth.instance;
 
