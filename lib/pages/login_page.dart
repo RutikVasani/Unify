@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'main_page.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-  ));
-}
 
 class LoginPage extends StatefulWidget {
   @override
@@ -26,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   late String txtemail, txtpassword;
 
   // ignore: non_constant_identifier_names
-  final DatabaseReference =
+  final DatabaseReference userRef =
       FirebaseDatabase.instance.reference().child("Users");
   final _auth = FirebaseAuth.instance;
 
@@ -37,6 +28,12 @@ class _LoginPageState extends State<LoginPage> {
 
       // ignore: unnecessary_null_comparison
       if (newUser != null) {
+        Map userDataMap = {
+          "name": txtemail.trim(),
+        };
+
+        userRef.set(userDataMap);
+
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => MainPage()));
       } else {
