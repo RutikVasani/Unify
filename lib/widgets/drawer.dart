@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +19,13 @@ class MyDrawer extends StatelessWidget {
             DrawerHeader(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: UserAccountsDrawerHeader(
-                margin: EdgeInsets.zero,
-                accountName: Text(
-                  "Rutik",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                accountEmail: Text(
-                  "rutikvasani370@gmail.com",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                currentAccountPicture:
-                    CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
-              ),
+                  margin: EdgeInsets.zero,
+                  accountName: Text("${user.displayName}"),
+                  accountEmail: Text("${user.email}"),
+                  currentAccountPicture:
+                      CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
+                  onDetailsPressed: () =>
+                      Navigator.pushNamed(context, MyRoutes.userProfileroutes)),
             ),
             ListTile(
               leading: Icon(
@@ -46,22 +38,9 @@ class MyDrawer extends StatelessWidget {
                     color: Colors.white,
                   )),
             ),
-            // ListTile(
-            //   leading: Icon(
-            //     CupertinoIcons.home,
-            //     color: Colors.white,
-            //   ),
-            //   title: Text("Home",
-            //       textScaleFactor: 1.4,
-            //       style: TextStyle(
-            //         color: Colors.white,
-            //       )),
-            //   onTap: () =>
-            //       Navigator.pushNamed(context, MyRoutes.mainpageroutes),
-            // ),
             ListTile(
               leading: Icon(
-                CupertinoIcons.news,
+                CupertinoIcons.news_solid,
                 color: Colors.white,
               ),
               title: Text("Notice Board",
@@ -136,7 +115,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                CupertinoIcons.zoom_out,
+                CupertinoIcons.lock_open_fill,
                 color: Colors.white,
               ),
               title: Text("Logout",

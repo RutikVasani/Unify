@@ -13,4 +13,5 @@ class MyRoutes {
   static String calenderroutes = "/calender";
   static String askqueryroutes = "/askquery";
   static String querySubmittedroutes = "/querySubmitted";
+  static String userProfileroutes = "/userProfile";
 }
