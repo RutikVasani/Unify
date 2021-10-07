@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Tabs/Query/query_submitted.dart';
 import 'package:flutter_application_1/Tabs/chats.dart';
 import 'package:flutter_application_1/Tabs/Query/ask_query.dart';
 import 'package:flutter_application_1/drawer_manager/Syllabus.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_database/firebase_database.dart';
-import 'Tabs/Query/query_sumitted.dart';
 import 'Tabs/calender.dart';
 
 void main() async {
