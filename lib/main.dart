@@ -12,11 +12,13 @@ import 'package:flutter_application_1/drawer_manager/userprofile.dart';
 import 'package:flutter_application_1/pages/forgot_page.dart';
 import 'package:flutter_application_1/pages/login_page.dart';
 import 'package:flutter_application_1/pages/main_page.dart';
+import 'package:flutter_application_1/pages/rough3.dart';
+import 'package:flutter_application_1/pages/roughpage.dart';
 import 'package:flutter_application_1/pages/splash_screen.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'Tabs/calender.dart';
 
 void main() async {
@@ -25,8 +27,10 @@ void main() async {
   runApp(MyApp());
 }
 
-// DatabaseReference userref =
-//     FirebaseDatabase.instance.reference().child("users");
+DatabaseReference userRef =
+    FirebaseDatabase.instance.reference().child("users");
+
+final databaseRef = FirebaseDatabase.instance.reference();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         debugShowCheckedModeBanner: false,
         // initialRoute: MyRoutes.splashroutes,
-        initialRoute: '/splash',
+        initialRoute: MyRoutes.roughPage3routes,
         routes: {
           "/splash": (context) => SplashScreen(),
           MyRoutes.loginroutes: (context) => LoginPage(),
@@ -55,6 +59,8 @@ class MyApp extends StatelessWidget {
           MyRoutes.askqueryroutes: (context) => AskQuery(),
           MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
           MyRoutes.userProfileroutes: (context) => UserProfile(),
+          MyRoutes.roughPageroutes: (context) => RoughPage(),
+          MyRoutes.roughPage3routes: (context) => HomePage(),
         },
       );
 }
