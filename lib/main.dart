@@ -13,6 +13,7 @@ import 'package:flutter_application_1/pages/forgot_page.dart';
 import 'package:flutter_application_1/pages/login_page.dart';
 import 'package:flutter_application_1/pages/main_page.dart';
 import 'package:flutter_application_1/pages/rough3.dart';
+import 'package:flutter_application_1/pages/roughLogin.dart';
 import 'package:flutter_application_1/pages/roughpage.dart';
 import 'package:flutter_application_1/pages/splash_screen.dart';
 import 'package:flutter_application_1/utils/routes.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         debugShowCheckedModeBanner: false,
         // initialRoute: MyRoutes.splashroutes,
-        initialRoute: MyRoutes.roughPage3routes,
+        initialRoute: MyRoutes.loginroutes,
         routes: {
           "/splash": (context) => SplashScreen(),
           MyRoutes.loginroutes: (context) => LoginPage(),
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
           MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
           MyRoutes.userProfileroutes: (context) => UserProfile(),
           MyRoutes.roughPageroutes: (context) => RoughPage(),
+          MyRoutes.roughLoginroutes: (context) => RLoginPage(),
           MyRoutes.roughPage3routes: (context) => HomePage(),
         },
       );

@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/pages/roughLogin.dart';
 import 'package:flutter_application_1/utils/routes.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main_page.dart';
 
-class LoginPage extends StatefulWidget {
+class RLoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RLoginPageState createState() => _RLoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RLoginPageState extends State<RLoginPage> {
   String name = "";
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: emailTextEditingController,
                           decoration: InputDecoration(
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(10.0),
@@ -99,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         TextFormField(
+                            controller: passwordTextEditingController,
                             decoration: InputDecoration(
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(10.0),
@@ -147,9 +149,16 @@ class _LoginPageState extends State<LoginPage> {
                               )),
                           icon: FaIcon(FontAwesomeIcons.lock),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              _signIn();
+                            if (passwordTextEditingController.text.length < 8) {
+                              displayToastMessage(
+                                  "Password must contain 8 characters",
+                                  context);
+                            } else if (!emailTextEditingController.text
+                                .contains("@")) {
+                              displayToastMessage(
+                                  "Email address is not valid", context);
+                            } else {
+                              loginAndAuthenticateUser(context);
                             }
                           },
                           label: const Text(
@@ -195,41 +204,42 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  void loginAndAuthenticateUser(BuildContext context) async {
+    final User? firebaseUser = (await _firebaseAuth
+            .signInWithEmailAndPassword(
+                email: emailTextEditingController.text,
+                password: passwordTextEditingController.text)
+            .catchError((errMsg) {
+      displayToastMessage("Error: " + errMsg.toString(), context);
+    }))
+        .user;
 
-  void _signIn() async {
-    try {
-      final User? newUser = (await _firebaseAuth
-              .signInWithEmailAndPassword(
-                  email: emailTextEditingController.text,
-                  password: passwordTextEditingController.text)
-              .catchError((errMsg) {
-        displayToastMessage("Error: " + errMsg.toString(), context);
-      }))
-          .user;
-
-      if (newUser != null) {
-        final user = FirebaseAuth.instance.currentUser;
-        final userId = user!.uid;
-
-        _addUsers(userId);
-
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainPage()));
-      } else {
-        _firebaseAuth.signOut();
-        print('fail');
+    if (firebaseUser != null) //usercreated
+    {
+      userRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
+        if (snap.value != null) {
+          Navigator.pushNamed(context, MyRoutes.mainpageroutes);
+          displayToastMessage(
+              "Congratulations, you are successfull logged in", context);
+        } else {
+          {
+            _firebaseAuth.signOut();
+          }
+          displayToastMessage(
+              "User not found.", context); //error occured - display error
+        }
+      });
+    } else {
+      {
+        displayToastMessage(
+            "User cannot login", context); //error occured - display error
       }
-    } catch (e) {
-      print(e);
     }
   }
+}
 
-  // ignore: non_constant_identifier_names
-  void _addUsers(String Id) {
-    userRef.push().set({
-      'name': emailTextEditingController.text,
-    });
-  }
+displayToastMessage(String message, BuildContext context) {
+  Fluttertoast.showToast(msg: message);
 }
 
 String? validateEmail(String? email) {

@@ -16,4 +16,5 @@ class MyRoutes {
   static String userProfileroutes = "/userProfile";
   static String roughPageroutes = "/roughPage";
   static String roughPage3routes = "/roughPage3";
+  static String roughLoginroutes = "/roughLogin";
 }
