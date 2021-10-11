@@ -16,9 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController emailTextEditingController = TextEditingController();
-  TextEditingController passwordTextEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -194,6 +191,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  //Firebase Authentication from Email Id and Password
+
+  bool accountExistinDatabase = false;
+
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void _signIn() async {
@@ -207,43 +211,34 @@ class _LoginPageState extends State<LoginPage> {
       }))
           .user;
 
-      if (newUser != null) {
+      if (newUser != null)
+      //checking in database for user imformation so data cant be overlapped.
+      {
         final user = FirebaseAuth.instance.currentUser;
         final userId = user!.uid;
 
+        
         _addUsers(userId);
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => MainPage()));
+        displayToastMessage(
+            "Congratulations, you are successfully logged in", context);
       } else {
+        // otherwise not found
         _firebaseAuth.signOut();
         print('fail');
+        displayToastMessage("User Account doesn't exits", context); //
       }
     } catch (e) {
+      print("Your Execption is mentioned below");
       print(e);
     }
   }
 
-  // ignore: non_constant_identifier_names
-  void _addUsers(String Id) {
+  void _addUsers(String id) {
     userRef.push().set({
       'name': emailTextEditingController.text,
     });
-  }
-}
-
-String? validateEmail(String? email) {
-  if (email!.isEmpty) {
-    return 'Enter email address';
-  } else {
-    return null;
-  }
-}
-
-String? validatePassword(String? password) {
-  if (password!.isEmpty) {
-    return 'Enter email address';
-  } else {
-    return null;
   }
 }

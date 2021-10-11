@@ -31,8 +31,6 @@ void main() async {
 DatabaseReference userRef =
     FirebaseDatabase.instance.reference().child("users");
 
-final databaseRef = FirebaseDatabase.instance.reference();
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
