@@ -38,6 +38,8 @@ dependencies:
   firebase_database: ^8.0.0
   firebase_database_web: ^0.1.0
   fluttertoast: ^8.0.8
+  provider: ^6.0.1
+  cloud_firestore: ^2.5.3
 
 flutter_icons:
   android: "launcher_icon"

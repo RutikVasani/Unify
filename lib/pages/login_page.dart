@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/main.dart';
@@ -198,6 +199,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void _signIn() async {
@@ -217,7 +219,11 @@ class _LoginPageState extends State<LoginPage> {
         final user = FirebaseAuth.instance.currentUser;
         final userId = user!.uid;
 
-        
+        /*Firestore*/
+        String uid = _firebaseAuth.currentUser!.uid.toString();
+        users.add({'uid': uid});
+        users.add({'name': emailTextEditingController});
+
         _addUsers(userId);
 
         Navigator.pushReplacement(
