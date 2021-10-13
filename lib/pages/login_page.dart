@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/pages/main_page.dart';
+// import 'package:flutter_application_1/pages/rough3.dart';
+// import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/roughLogin.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main_page.dart';
+// import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -220,31 +222,51 @@ class _LoginPageState extends State<LoginPage> {
         final userId = user!.uid;
 
         /*Firestore*/
-        String uid = _firebaseAuth.currentUser!.uid.toString();
-        users.add({'uid': uid});
-        users.add({'name': emailTextEditingController});
+        // String uid = _firebaseAuth.currentUser!.uid.toString();
+        // users.add({'uid': uid});
+        // users.add({'email': emailTextEditingController});
 
-        _addUsers(userId);
+        var userData = {
+          'provider': 'email',
+          'photoUrl': user.photoURL,
+          'email': emailTextEditingController.text,
+        };
 
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainPage()));
-        displayToastMessage(
-            "Congratulations, you are successfully logged in", context);
-      } else {
-        // otherwise not found
-        _firebaseAuth.signOut();
-        print('fail');
-        displayToastMessage("User Account doesn't exits", context); //
+        // _addUsers(userId);
+
+        users.doc(userId).get().then((doc) {
+          if (doc.exists) {
+            // old user
+            doc.reference.update(userData);
+
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => MainPage(),
+              ),
+            );
+          } else {
+            // new user
+
+            users.doc(user.uid).set(userData);
+
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => MainPage(),
+              ),
+            );
+          }
+        });
       }
     } catch (e) {
-      print("Your Execption is mentioned below");
       print(e);
+      print("Sign in not successful !");
+      // better show an alert here
     }
-  }
 
-  void _addUsers(String id) {
-    userRef.push().set({
-      'name': emailTextEditingController.text,
-    });
+    // void _addUsers(String id) {
+    //   userRef.push().set({
+    //     'name': emailTextEditingController.text,
+    //   });
+    // }
   }
 }
