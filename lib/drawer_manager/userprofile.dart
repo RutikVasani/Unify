@@ -41,7 +41,7 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         title: Text(
           "Your Profile",
-          style: TextStyle(fontSize: 23, color: Colors.white), 
+          style: TextStyle(fontSize: 23, color: Colors.white),
         ),
         // backgroundColor: Colors.blue,
         flexibleSpace: Container(
@@ -64,11 +64,11 @@ class _UserProfileState extends State<UserProfile> {
                   controller: nameController,
                   textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: true,
                     icon: Icon(Icons.person),
-                    hintText: 'What do people call you?',
-                    labelText: 'Name *',
+                    labelText: 'Enter Your Name',
+                    border: OutlineInputBorder(),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
                   ),
                   onSaved: (String? value) {
                     this._name = value;
@@ -86,10 +86,12 @@ class _UserProfileState extends State<UserProfile> {
               TextFormField(
                   controller: phoneController,
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
                     filled: true,
                     icon: Icon(Icons.phone),
-                    hintText: ' Enter your Mobile No.',
+                    hintText: '  Enter your Mobile No.',
                     labelText: 'Phone Number *',
                     prefixText: '+91',
                   ),
@@ -118,8 +120,9 @@ class _UserProfileState extends State<UserProfile> {
               TextFormField(
                 controller: bioController,
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.info),
                   border: OutlineInputBorder(),
-                  hintText: 'Write your Query',
+                  hintText: 'Add your Bio...',
                   helperText: 'Keep it short, this is just a demo.',
                   labelText: 'Add your Bio',
                 ),
@@ -136,7 +139,7 @@ class _UserProfileState extends State<UserProfile> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     )),
-                icon: FaIcon(FontAwesomeIcons.check),
+                icon: FaIcon(FontAwesomeIcons.upload),
                 onPressed: () {
                   if (_formKey3.currentState!.validate()) {
                     _formKey3.currentState!.save();
@@ -169,7 +172,6 @@ class _UserProfileState extends State<UserProfile> {
     displayToastMessage("Your Profile is saved", context);
   }
 
-  
   void saveuserProfile(String id) {
     userRef.push().set({
       'Name  ': nameController.text,

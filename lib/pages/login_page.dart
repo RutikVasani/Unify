@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/pages/main_page.dart';
-// import 'package:flutter_application_1/pages/rough3.dart';
-// import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/roughLogin.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
