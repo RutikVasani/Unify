@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/utils/routes.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AskQuery extends StatefulWidget {
   const AskQuery({Key? key}) : super(key: key);
@@ -49,7 +52,8 @@ class _AskQueryState extends State<AskQuery> {
   String? _name;
   String? _id;
   String? _phoneNumber;
-  String? _email;
+  String? title;
+  String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +85,9 @@ class _AskQueryState extends State<AskQuery> {
               TextFormField(
                   textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
                     filled: true,
                     icon: Icon(Icons.person),
                     hintText: 'What do people call you?',
@@ -101,7 +107,9 @@ class _AskQueryState extends State<AskQuery> {
               // "Phone number" form.
               TextFormField(
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
                     filled: true,
                     icon: Icon(Icons.phone),
                     hintText: ' Enter your Mobile No.',
@@ -128,27 +136,13 @@ class _AskQueryState extends State<AskQuery> {
                     return null;
                   }),
               const SizedBox(height: 24.0),
-              // "Email" form.
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  filled: true,
-                  icon: Icon(Icons.email),
-                  hintText: 'Your email address',
-                  labelText: 'E-mail',
-                ),
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (String? value) {
-                  this._email = value;
-                  print('email=$_email');
-                },
-              ),
-              const SizedBox(height: 24.0),
               // "Name" form.
               TextFormField(
                   textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red)),
                     filled: true,
                     icon: Icon(Icons.contacts),
                     hintText: 'Eg. 20DCS005, 20DIT051, etc.',
@@ -178,50 +172,81 @@ class _AskQueryState extends State<AskQuery> {
                   items: _dropDownMenuItems,
                 ),
               ),
+              Divider(
+                color: Colors.grey,
+                height: 30,
+                thickness: 5,
+                indent: 0,
+                endIndent: 0,
+              ),
               const SizedBox(height: 24.0),
+              TextFormField(
+                decoration: InputDecoration.collapsed(
+                  hintText: "Query Title",
+                ),
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[900],
+                ),
+                onChanged: (_val) {
+                  title = _val;
+                },
+              ),
+              Divider(
+                color: Colors.black,
+                height: 30,
+                thickness: 1,
+                indent: 1,
+                endIndent: 5,
+              ),
+              const SizedBox(height: 5.0),
               // "Life story" form.
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Write your Query',
-                  helperText: 'Keep it short, this is just a demo.',
+                  hintText: 'Write your Query\n\n\n\n',
+                  helperText: 'Please ask in understandable way.',
                   labelText: 'Ask Your Query / Doubts',
                 ),
-                maxLines: 3,
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+                onChanged: (_val) {
+                  description = _val;
+                },
+                maxLines: null,
               ),
               const SizedBox(height: 24.0),
               // "Password" form.
               Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.shade800,
-                        Colors.blue.shade300,
-                        Colors.blue.shade800,
-                      ],
-                      begin: FractionalOffset.centerLeft,
-                      end: FractionalOffset.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(150, 45),
+                        primary: Colors.blueAccent[700],
+                        onPrimary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        )),
+                    icon: FaIcon(
+                      FontAwesomeIcons.arrowAltCircleRight,
                     ),
-                    borderRadius: BorderRadius.circular(changeButton ? 50 : 8)),
-                child: Material(
-                  color: Colors.white.withOpacity(0),
-                  child: InkWell(
-                    onTap: () => moveToQuerySubmit(context),
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      height: 50,
-                      width: changeButton ? 50 : 10,
-                      alignment: Alignment.center,
-                      child: changeButton
-                          ? Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            )
-                          : Text("Submit",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white)),
+                    onPressed: () {
+                      if (_formKey2.currentState!.validate()) {
+                        _formKey2.currentState!.save();
+                        add();
+                        Navigator.pushNamed(
+                            context, MyRoutes.querySubmittedroutes);
+                      }
+                    },
+                    label: const Text(
+                      'Submit Query',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -231,5 +256,26 @@ class _AskQueryState extends State<AskQuery> {
         ),
       ),
     );
+  }
+
+/*SAVING TO DATABASE*/
+  void add() async {
+    CollectionReference ref = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("queries");
+
+    var data = {
+      'name       ': _name,
+      'studentId  ': _id,
+      'department ': _btn2SelectedVal,
+      'title': title,
+      'description': description,
+      'created': DateTime.now(),
+    };
+
+    ref.add(data);
+
+    Navigator.pop(context);
   }
 }

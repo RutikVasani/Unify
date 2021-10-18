@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                       Tab(text: 'QUERY')
                     ]),
                 titleSpacing: 0,
-                elevation: 20,
+                elevation: 5,
               ),
             ],
             body: TabBarView(children: [

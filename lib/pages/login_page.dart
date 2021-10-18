@@ -137,11 +137,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.indigo[400],
+                              primary: Colors.blueAccent[700],
                               onPrimary: Colors.white,
                               minimumSize: Size(200, 45),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius: BorderRadius.circular(15.0),
                               )),
                           icon: FaIcon(FontAwesomeIcons.lock),
                           onPressed: () {
@@ -225,6 +225,7 @@ class _LoginPageState extends State<LoginPage> {
         // users.add({'email': emailTextEditingController});
 
         var userData = {
+          'uid': user.uid,
           'provider': 'email',
           'photoUrl': user.photoURL,
           'email': emailTextEditingController.text,
@@ -242,6 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                 builder: (context) => MainPage(),
               ),
             );
+            displayToastMessage("Login Successful", context);
           } else {
             // new user
 

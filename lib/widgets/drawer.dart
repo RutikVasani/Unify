@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 
 class MyDrawer extends StatelessWidget {
-  final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class MyDrawer extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: UserAccountsDrawerHeader(
                     margin: EdgeInsets.zero,
-                    accountName: Text("${user.displayName}"),
-                    accountEmail: Text("${user.email}"),
+                    accountName: Text("${user!.displayName}"),
+                    accountEmail: Text("${user!.email}"),
                     currentAccountPicture:
                         CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
                     onDetailsPressed: () => Navigator.pushNamed(

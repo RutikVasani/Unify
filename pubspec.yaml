@@ -40,6 +40,9 @@ dependencies:
   fluttertoast: ^8.0.8
   provider: ^6.0.1
   cloud_firestore: ^2.5.3
+  image_picker: ^0.8.4+2
+  url_launcher: ^6.0.12
+  path_provider: ^2.0.5
 
 flutter_icons:
   android: "launcher_icon"
