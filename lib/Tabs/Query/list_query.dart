@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Tabs/Query/ask_query.dart';
 import 'package:flutter_application_1/Tabs/Query/editQuery.dart';
+import 'package:flutter_application_1/pages/roughpage.dart';
 import 'package:intl/intl.dart';
 
 class ListQueries extends StatefulWidget {
@@ -35,6 +38,7 @@ class _ListQueriesState extends State<ListQueries> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyanAccent[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
@@ -55,126 +59,132 @@ class _ListQueriesState extends State<ListQueries> {
         backgroundColor: Colors.yellow[300],
       ),
       //
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/queries8.jpg"),
-            fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              15,
+            ),
+            image: DecorationImage(
+              image: AssetImage("assets/images/queries8.jpg"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: FutureBuilder<QuerySnapshot>(
-          future: ref.get(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!.docs.length == 0) {
-                return Center(
-                  child: Text(
-                    "You have no saved Notes !",
-                    style: TextStyle(
-                      color: Colors.white70,
+          child: FutureBuilder<QuerySnapshot>(
+            future: ref.get(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!.docs.length == 0) {
+                  return Center(
+                    child: Text(
+                      "You have no saved Notes !",
+                      style: TextStyle(
+                        color: Colors.white70,
+                      ),
                     ),
-                  ),
-                );
-              }
+                  );
+                }
 
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  Random random = new Random();
-                  Color? bg = myColors[random.nextInt(4)];
-                  Map? data = snapshot.data!.docs[index].data() as Map?;
-                  // DateTime mydateTime = data!['created'].toDate();
-                  // String formattedTime =
-                  //     DateFormat.yMMMd().add_jm().format(mydateTime);
-                  Timestamp t = data!['created'];
-                  DateTime now = t.toDate();
-                  String formattedTime =
-                      DateFormat('kk:mm:ss \nEEE d MMM').format(now);
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    Random random = new Random();
+                    Color? bg = myColors[random.nextInt(4)];
+                    Map? data = snapshot.data!.docs[index].data() as Map?;
+                    // DateTime mydateTime = data!['created'].toDate();
+                    // String formattedTime =
+                    //     DateFormat.yMMMd().add_jm().format(mydateTime);
+                    Timestamp t = data!['created'];
+                    DateTime now = t.toDate();
+                    String formattedTime =
+                        DateFormat('kk:mm:ss \nEEE d MMM').format(now);
 
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(
-                        MaterialPageRoute(
-                          builder: (context) => ViewQuery(
-                            data,
-                            formattedTime,
-                            snapshot.data!.docs[index].reference,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(
+                          MaterialPageRoute(
+                            builder: (context) => ViewQuery(
+                              data,
+                              formattedTime,
+                              snapshot.data!.docs[index].reference,
+                            ),
                           ),
-                        ),
-                      )
-                          .then((value) {
-                        setState(() {});
-                      });
-                    },
-                    child: Container(
-                      height: 125,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Card(
-                          color: bg,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${data['title']}",
-                                  style: TextStyle(
-                                    fontSize: 24.0,
-                                    fontFamily: "lato",
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                        )
+                            .then((value) {
+                          setState(() {});
+                        });
+                      },
+                      child: Container(
+                        height: 125,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Card(
+                            color: bg,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${data['title']}",
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontFamily: "lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                //
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      // alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "${data['studentId']} \n${user!.email}",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontFamily: "lato",
-                                          color: Colors.black87,
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  //
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        // alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "${data['studentId']} \n${user!.email}",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontFamily: "lato",
+                                            color: Colors.black87,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        formattedTime,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontFamily: "lato",
-                                          color: Colors.black87,
+                                      Container(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          formattedTime,
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontFamily: "lato",
+                                            color: Colors.black87,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              );
-            } else {
-              return Center(
-                child: Text("Loading..."),
-              );
-            }
-          },
+                    );
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text("Loading..."),
+                );
+              }
+            },
+          ),
         ),
       ),
     );

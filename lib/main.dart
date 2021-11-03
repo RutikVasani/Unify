@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Tabs/Query/ask_query.dart';
+import 'package:flutter_application_1/Tabs/Query/list_query.dart';
 import 'package:flutter_application_1/Tabs/Query/query_submitted.dart';
 import 'package:flutter_application_1/Tabs/calendar.dart';
 import 'package:flutter_application_1/Tabs/chats.dart';
@@ -40,7 +43,8 @@ class MyApp extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         debugShowCheckedModeBanner: false,
         // initialRoute: MyRoutes.splashroutes,
-        initialRoute: MyRoutes.loginroutes,
+        // initialRoute: MyRoutes.loginroutes,
+        initialRoute: MyRoutes.mainpageroutes,
         home: Calendar(),
         routes: {
           "/splash": (context) => SplashScreen(),
@@ -56,10 +60,11 @@ class MyApp extends StatelessWidget {
           MyRoutes.syllabusroutes: (context) => Syllabus(),
           MyRoutes.chatroutes: (context) => Chats(),
           MyRoutes.askqueryroutes: (context) => AskQuery(),
+          MyRoutes.listqueryroutes: (context) => ListQueries(),
           // MyRoutes.addinforoutes: (context) => AddInfo(),
           MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
           MyRoutes.userProfileroutes: (context) => UserProfile(),
-          MyRoutes.roughPageroutes: (context) => RoughPage(),
+          // MyRoutes.roughPageroutes: (context) => RoughPage(),
           MyRoutes.roughLoginroutes: (context) => RLoginPage(),
           MyRoutes.roughPage3routes: (context) => HomePage(),
         },

@@ -12,6 +12,7 @@ class MyRoutes {
   static String chatroutes = "/chats";
   static String calendarroutes = "/calendar";
   static String askqueryroutes = "/askquery";
+  static String listqueryroutes = "/listqueries";
   static String addinforoutes = "/addinfo";
   static String querySubmittedroutes = "/querySubmitted";
   static String userProfileroutes = "/userProfile";

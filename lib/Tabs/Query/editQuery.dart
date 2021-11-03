@@ -13,7 +13,7 @@ class ViewQuery extends StatefulWidget {
 }
 
 class _ViewQueryState extends State<ViewQuery> {
-  String? title;
+  late String title;
   late String studentId;
   late String des;
 

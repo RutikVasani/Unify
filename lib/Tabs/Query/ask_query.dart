@@ -77,46 +77,85 @@ class _AskQueryState extends State<AskQuery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyanAccent[100],
       appBar: appBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-        child: Form(
-          key: _formKey2,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const SizedBox(height: 24.0),
-              // "Name" form.
-              nameE(),
-              const SizedBox(height: 24.0),
-              // "Phone number" form.
-              phone(),
-              const SizedBox(height: 24.0),
-              // "Name" form.
-              idD(),
-              const SizedBox(height: 24.0),
-              emailL(),
-              const SizedBox(height: 24.0),
-              instituteE(),
-              SizedBox(
-                height: 30,
-              ),
-              departmentT(),
-              SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 98),
-                child: Image.asset("assets/images/downarrow.gif",
-                    height: 100, fit: BoxFit.fill),
-              ),
-              titleE(),
-              //
-              noteDescription(context),
+      body: Padding(
+        padding: const EdgeInsets.all(13.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: Colors.white,
+          ),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child: Form(
+              key: _formKey2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 24.0),
+                        nameE(),
+                        const SizedBox(height: 24.0),
+                        // "Phone number" form.
+                        phone(),
+                        const SizedBox(height: 24.0),
+                        // "Name" form.
+                        idD(),
+                        const SizedBox(height: 24.0),
+                        emailL(),
+                        const SizedBox(height: 24.0),
+                        instituteE(),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        departmentT(),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
+                  ),
 
-              submit_info_Create_Query(context),
-            ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 125),
+                    child: Image.asset("assets/images/downarrow.gif",
+                        height: 70, fit: BoxFit.fill),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 5.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: Colors.orange[100],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            titleE(),
+                            noteDescription(context),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  //
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  submit_info_Create_Query(context),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -279,7 +318,7 @@ class _AskQueryState extends State<AskQuery> {
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               minimumSize: Size(150, 45),
-              primary: Colors.blueAccent[700],
+              primary: Colors.orange[900],
               onPrimary: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
@@ -311,6 +350,7 @@ class _AskQueryState extends State<AskQuery> {
         decoration: InputDecoration.collapsed(
           hintText: "Query Title",
         ),
+        initialValue: "Query Title",
         style: TextStyle(
           fontSize: 32.0,
           fontFamily: "lato",
@@ -339,10 +379,16 @@ class _AskQueryState extends State<AskQuery> {
         style: TextStyle(
           fontSize: 20.0,
           fontFamily: "lato",
-          color: Colors.grey,
+          color: Colors.grey[800],
         ),
         onChanged: (_val) {
           description = _val;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Please provide some description";
+          }
+          return null;
         },
         maxLines: 20,
       ),
