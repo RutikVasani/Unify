@@ -94,19 +94,6 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  CupertinoIcons.play_rectangle_fill,
-                  color: Colors.white,
-                ),
-                title: Text("Resume",
-                    textScaleFactor: 1.4,
-                    style: TextStyle(
-                      color: Colors.white,
-                    )),
-                onTap: () =>
-                    Navigator.pushNamed(context, MyRoutes.resumeroutes),
-              ),
-              ListTile(
-                leading: Icon(
                   CupertinoIcons.settings,
                   color: Colors.white,
                 ),

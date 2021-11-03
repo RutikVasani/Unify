@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Tabs/Query/list_query.dart';
-import 'package:flutter_application_1/Tabs/calendar.dart';
-import 'package:flutter_application_1/Tabs/chats.dart';
+import 'package:flutter_application_1/Tabs/calander/calender.dart';
+import 'package:flutter_application_1/Tabs/chat_screen.dart';
 import 'package:flutter_application_1/widgets/drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ],
             body: TabBarView(children: [
-              Chats(),
+              ChatScreen(),
               Calendar(),
               ListQueries(),
             ]),
