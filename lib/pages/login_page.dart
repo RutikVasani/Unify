@@ -246,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
             displayToastMessage("Login Successful", context);
           } else {
             // new user
-
             users.doc(user.uid).set(userData);
 
             Navigator.of(context).pushReplacement(
@@ -255,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
-        });
+        },);
       }
     } catch (e) {
       print(e);

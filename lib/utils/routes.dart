@@ -10,8 +10,9 @@ class MyRoutes {
   static String settingroutes = "/setting";
   static String syllabusroutes = "/syllabus";
   static String chatroutes = "/chats";
-  static String calenderroutes = "/calender";
+  static String calendarroutes = "/calendar";
   static String askqueryroutes = "/askquery";
+  static String addinforoutes = "/addinfo";
   static String querySubmittedroutes = "/querySubmitted";
   static String userProfileroutes = "/userProfile";
   static String roughPageroutes = "/roughPage";

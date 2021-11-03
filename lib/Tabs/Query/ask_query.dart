@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,22 @@ class _AskQueryState extends State<AskQuery> {
     'CIPS',
   ];
 
-  final List<DropdownMenuItem<String>> _dropDownMenuItems = menuItems
+  static const departmenT = <String>[
+    'CSE',
+    'IT',
+    'CE',
+  ];
+
+  final List<DropdownMenuItem<String>> _dropDownMenuItems1 = menuItems
+      .map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+      )
+      .toList();
+
+  final List<DropdownMenuItem<String>> dropdown2 = departmenT
       .map(
         (String value) => DropdownMenuItem<String>(
           value: value,
@@ -48,32 +65,21 @@ class _AskQueryState extends State<AskQuery> {
       .toList();
 
   String? _btn2SelectedVal;
+  String? _btn3SelectedVal;
 
   String? _name;
   String? _id;
   String? _phoneNumber;
   String? title;
   String? description;
+  String? email;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Ask your Query",
-          style: TextStyle(fontSize: 23, color: Colors.white),
-        ),
-        // backgroundColor: Colors.blue,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Colors.indigo.shade800,
-            Colors.blue.shade500,
-          ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
-        ),
-      ),
+      appBar: appBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
         child: Form(
           key: _formKey2,
           child: Column(
@@ -82,178 +88,263 @@ class _AskQueryState extends State<AskQuery> {
             children: <Widget>[
               const SizedBox(height: 24.0),
               // "Name" form.
-              TextFormField(
-                  textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red)),
-                    filled: true,
-                    icon: Icon(Icons.person),
-                    hintText: 'What do people call you?',
-                    labelText: 'Name *',
-                  ),
-                  onSaved: (String? value) {
-                    this._name = value;
-                    print('name=$_name');
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Name cannot be empty";
-                    }
-                    return null;
-                  }),
+              nameE(),
               const SizedBox(height: 24.0),
               // "Phone number" form.
-              TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red)),
-                    filled: true,
-                    icon: Icon(Icons.phone),
-                    hintText: ' Enter your Mobile No.',
-                    labelText: 'Phone Number *',
-                    prefixText: '+91',
-                  ),
-                  keyboardType: TextInputType.phone,
-                  onSaved: (String? value) {
-                    this._phoneNumber = value;
-                    print('phoneNumber=$_phoneNumber');
-                  },
-                  // TextInputFormatters are applied in sequence.
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Phone Number cannot be empty";
-                    } else if (value.length < 10) {
-                      return "Must have 10 digits";
-                    } else if (value.length > 10) {
-                      return "Must have 10 digits";
-                    }
-                    return null;
-                  }),
+              phone(),
               const SizedBox(height: 24.0),
               // "Name" form.
-              TextFormField(
-                  textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red)),
-                    filled: true,
-                    icon: Icon(Icons.contacts),
-                    hintText: 'Eg. 20DCS005, 20DIT051, etc.',
-                    labelText: 'Student ID *',
-                  ),
-                  onSaved: (String? value) {
-                    this._id = value;
-                    print('ID=$_id');
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "ID cannot be empty";
-                    }
-                    return null;
-                  }),
+              idD(),
               const SizedBox(height: 24.0),
-              ListTile(
-                title: const Text('Depratment :'),
-                trailing: DropdownButton(
-                  value: _btn2SelectedVal,
-                  hint: const Text('Choose'),
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() => _btn2SelectedVal = newValue);
-                    }
-                  },
-                  items: _dropDownMenuItems,
-                ),
-              ),
-              Divider(
-                color: Colors.grey,
+              emailL(),
+              const SizedBox(height: 24.0),
+              instituteE(),
+              SizedBox(
                 height: 30,
-                thickness: 5,
-                indent: 0,
-                endIndent: 0,
               ),
-              const SizedBox(height: 24.0),
-              TextFormField(
-                decoration: InputDecoration.collapsed(
-                  hintText: "Query Title",
-                ),
-                style: TextStyle(
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[900],
-                ),
-                onChanged: (_val) {
-                  title = _val;
-                },
-              ),
-              Divider(
-                color: Colors.black,
+              departmentT(),
+              SizedBox(
                 height: 30,
-                thickness: 1,
-                indent: 1,
-                endIndent: 5,
               ),
-              const SizedBox(height: 5.0),
-              // "Life story" form.
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Write your Query\n\n\n\n',
-                  helperText: 'Please ask in understandable way.',
-                  labelText: 'Ask Your Query / Doubts',
-                ),
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-                onChanged: (_val) {
-                  description = _val;
-                },
-                maxLines: null,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 98),
+                child: Image.asset("assets/images/downarrow.gif",
+                    height: 100, fit: BoxFit.fill),
               ),
-              const SizedBox(height: 24.0),
-              // "Password" form.
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(150, 45),
-                        primary: Colors.blueAccent[700],
-                        onPrimary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        )),
-                    icon: FaIcon(
-                      FontAwesomeIcons.arrowAltCircleRight,
-                    ),
-                    onPressed: () {
-                      if (_formKey2.currentState!.validate()) {
-                        _formKey2.currentState!.save();
-                        add();
-                        Navigator.pushNamed(
-                            context, MyRoutes.querySubmittedroutes);
-                      }
-                    },
-                    label: const Text(
-                      'Submit Query',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              titleE(),
+              //
+              noteDescription(context),
+
+              submit_info_Create_Query(context),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      title: Text(
+        "Ask your Query",
+        style: TextStyle(fontSize: 23, color: Colors.white),
+      ),
+      // backgroundColor: Colors.blue,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Colors.indigo.shade800,
+          Colors.blue.shade500,
+        ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
+      ),
+    );
+  }
+
+  ListTile departmentT() {
+    return ListTile(
+      title: const Text('Department :'),
+      trailing: DropdownButton(
+        value: _btn3SelectedVal,
+        hint: const Text('Choose'),
+        onChanged: (String? newValue) {
+          if (newValue != null) {
+            setState(() => _btn3SelectedVal = newValue);
+          }
+        },
+        items: dropdown2,
+      ),
+    );
+  }
+
+  ListTile instituteE() {
+    return ListTile(
+      title: const Text('Institute :'),
+      trailing: DropdownButton(
+        value: _btn2SelectedVal,
+        hint: const Text('Choose'),
+        onChanged: (String? newValue) {
+          if (newValue != null) {
+            setState(() => _btn2SelectedVal = newValue);
+          }
+        },
+        items: _dropDownMenuItems1,
+      ),
+    );
+  }
+
+  TextFormField idD() {
+    return TextFormField(
+        textCapitalization: TextCapitalization.words,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          errorBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          filled: true,
+          icon: Icon(Icons.contacts),
+          hintText: 'Eg. 20DCS005, 20DIT051, etc.',
+          labelText: 'Student ID *',
+        ),
+        onSaved: (String? value) {
+          this._id = value;
+          print('ID=$_id');
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "ID cannot be empty";
+          }
+          return null;
+        });
+  }
+
+  TextFormField nameE() {
+    return TextFormField(
+        textCapitalization: TextCapitalization.words,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          errorBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          filled: true,
+          icon: Icon(Icons.person),
+          hintText: 'What do people call you?',
+          labelText: 'Name *',
+        ),
+        onSaved: (String? value) {
+          this._name = value;
+          print('name=$_name');
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Name cannot be empty";
+          }
+          return null;
+        });
+  }
+
+  TextFormField emailL() {
+    return TextFormField(
+      textCapitalization: TextCapitalization.words,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        filled: true,
+        icon: Icon(Icons.mail_outline),
+        labelText: 'Email *',
+      ),
+      onSaved: (String? value) {
+        this._name = value;
+        print('email=$email');
+      },
+      validator: (input) => input!.isValidEmail() ? null : "Check your email",
+    );
+  }
+
+  TextFormField phone() {
+    return TextFormField(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          errorBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          filled: true,
+          icon: Icon(Icons.phone),
+          hintText: ' Enter your Mobile No.',
+          labelText: 'Phone Number *',
+          prefixText: '+91',
+        ),
+        keyboardType: TextInputType.phone,
+        onSaved: (String? value) {
+          this._phoneNumber = value;
+          print('phoneNumber=$_phoneNumber');
+        },
+        // TextInputFormatters are applied in sequence.
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Phone Number cannot be empty";
+          } else if (value.length < 10) {
+            return "Must have 10 digits";
+          } else if (value.length > 10) {
+            return "Must have 10 digits";
+          }
+          return null;
+        });
+  }
+
+  Container submit_info_Create_Query(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        child: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(150, 45),
+              primary: Colors.blueAccent[700],
+              onPrimary: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+              )),
+          icon: FaIcon(
+            FontAwesomeIcons.arrowAltCircleRight,
+          ),
+          onPressed: () {
+            if (_formKey2.currentState!.validate()) {
+              _formKey2.currentState!.save();
+              add();
+              Navigator.pushNamed(context, MyRoutes.querySubmittedroutes);
+            }
+          },
+          label: const Text(
+            'Submit Query',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  TextFormField titleE() {
+    return TextFormField(
+        decoration: InputDecoration.collapsed(
+          hintText: "Query Title",
+        ),
+        style: TextStyle(
+          fontSize: 32.0,
+          fontFamily: "lato",
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
+        onChanged: (_val) {
+          title = _val;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Query Title cannot be empty";
+          }
+          return null;
+        });
+  }
+
+  Container noteDescription(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.75,
+      padding: const EdgeInsets.only(top: 12.0),
+      child: TextFormField(
+        decoration: InputDecoration.collapsed(
+          hintText: "Query Description",
+        ),
+        style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: "lato",
+          color: Colors.grey,
+        ),
+        onChanged: (_val) {
+          description = _val;
+        },
+        maxLines: 20,
       ),
     );
   }
@@ -266,9 +357,11 @@ class _AskQueryState extends State<AskQuery> {
         .collection("queries");
 
     var data = {
-      'name       ': _name,
-      'studentId  ': _id,
-      'department ': _btn2SelectedVal,
+      'name': _name,
+      'studentId': _id,
+      'phone': _phoneNumber,
+      'institute': _btn2SelectedVal,
+      'department': _btn3SelectedVal,
       'title': title,
       'description': description,
       'created': DateTime.now(),
@@ -277,5 +370,13 @@ class _AskQueryState extends State<AskQuery> {
     ref.add(data);
 
     Navigator.pop(context);
+  }
+}
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
   }
 }

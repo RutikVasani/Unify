@@ -17,7 +17,7 @@ class _QuerySubmittedState extends State<QuerySubmitted> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 10), () {});
+    await Future.delayed(Duration(seconds: 5), () {});
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => MainPage()));
   }
@@ -45,7 +45,7 @@ class _QuerySubmittedState extends State<QuerySubmitted> {
           Row(
             children: [
               SizedBox(
-                width: 90,
+                width: 50,
               ),
               Container(
                 child: Text(

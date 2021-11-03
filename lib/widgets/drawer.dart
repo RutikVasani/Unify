@@ -68,7 +68,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  CupertinoIcons.hand_raised_fill,
+                  CupertinoIcons.chart_bar_square,
                   color: Colors.white,
                 ),
                 title: Text("Polling",

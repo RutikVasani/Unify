@@ -13,7 +13,8 @@ class ViewQuery extends StatefulWidget {
 }
 
 class _ViewQueryState extends State<ViewQuery> {
-  late String title;
+  String? title;
+  late String studentId;
   late String des;
 
   bool edit = false;
@@ -22,10 +23,10 @@ class _ViewQueryState extends State<ViewQuery> {
   @override
   Widget build(BuildContext context) {
     title = widget.data['title'];
+    studentId = widget.data['studentId'];
     des = widget.data['description'];
     return SafeArea(
       child: Scaffold(
-        //
         floatingActionButton: edit
             ? FloatingActionButton(
                 onPressed: save,
@@ -70,6 +71,7 @@ class _ViewQueryState extends State<ViewQuery> {
                       ),
                     ),
                     //
+
                     Row(
                       children: [
                         ElevatedButton(
@@ -131,6 +133,10 @@ class _ViewQueryState extends State<ViewQuery> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+
                       TextFormField(
                         decoration: InputDecoration.collapsed(
                           hintText: "Title",
@@ -196,6 +202,33 @@ class _ViewQueryState extends State<ViewQuery> {
                         },
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  child: ElevatedButton(
+                    child: const Text('Student Info'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green[600],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Scaffold(
+                            backgroundColor: Colors.amber,
+                            body: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Text("eff"),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ],

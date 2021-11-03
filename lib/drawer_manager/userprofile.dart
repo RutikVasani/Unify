@@ -35,7 +35,7 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
-  static const menuItems = <String>[
+  static const institutE = <String>[
     'DEPSTAR',
     'CSPIT',
     'CMPICA',
@@ -43,7 +43,22 @@ class _UserProfileState extends State<UserProfile> {
     'CIPS',
   ];
 
-  final List<DropdownMenuItem<String>> _dropDownMenuItems = menuItems
+  static const departmenT = <String>[
+    'CSE',
+    'IT',
+    'CE',
+  ];
+
+  final List<DropdownMenuItem<String>> dropdown1 = institutE
+      .map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+      )
+      .toList();
+
+  final List<DropdownMenuItem<String>> dropdown2 = departmenT
       .map(
         (String value) => DropdownMenuItem<String>(
           value: value,
@@ -160,6 +175,10 @@ class _UserProfileState extends State<UserProfile> {
               SizedBox(
                 height: 15,
               ),
+              dob(),
+              SizedBox(
+                height: 15,
+              ),
               phoneNo(),
 
               SizedBox(
@@ -170,6 +189,7 @@ class _UserProfileState extends State<UserProfile> {
                 height: 15,
               ),
               department(),
+
               SizedBox(
                 height: 15,
               ),
@@ -185,10 +205,13 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
+
   /* ----------------- Method Extracted bewlow--------------*/
   /* ----------------- Method Extracted bewlow--------------*/
   /* ----------------- Method Extracted bewlow--------------*/
   /* ----------------- Method Extracted bewlow--------------*/
+  
+  TextFormField dob() => TextFormField();
 
   ListTile institute() {
     return ListTile(
@@ -201,7 +224,7 @@ class _UserProfileState extends State<UserProfile> {
             setState(() => _btn3SelectedVal = newValue);
           }
         },
-        items: _dropDownMenuItems,
+        items: dropdown1,
       ),
     );
   }
@@ -217,7 +240,7 @@ class _UserProfileState extends State<UserProfile> {
             setState(() => _btn4SelectedVal = newValue);
           }
         },
-        items: _dropDownMenuItems,
+        items: dropdown2,
       ),
     );
   }
