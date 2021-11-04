@@ -39,14 +39,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         themeMode: ThemeMode.light,
-        // theme: MyTheme.lightTheme(context),
-        // darkTheme: MyTheme.darkTheme(context),
         debugShowCheckedModeBanner: false,
         theme: lightThemeData(context),
         darkTheme: darkThemeData(context),
-        // initialRoute: MyRoutes.splashroutes,
-        // initialRoute: MyRoutes.loginroutes,
-        initialRoute: MyRoutes.mainpageroutes,
+        initialRoute: MyRoutes.splashroutes,
         home: Calendar(),
         routes: {
           "/splash": (context) => SplashScreen(),

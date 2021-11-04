@@ -315,13 +315,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
-  infinite_listview:
-    dependency: transitive
-    description:
-      name: infinite_listview
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   intl:
     dependency: transitive
     description:
@@ -350,13 +343,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  multi_image_picker2:
-    dependency: "direct main"
-    description:
-      name: multi_image_picker2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.02"
   nested:
     dependency: transitive
     description:
@@ -364,13 +350,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  numberpicker:
-    dependency: "direct main"
-    description:
-      name: numberpicker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   page_transition:
     dependency: transitive
     description:
@@ -469,8 +448,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.1"
-<<<<<<< HEAD
-=======
   scrollable_positioned_list:
     dependency: transitive
     description:
@@ -478,7 +455,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.10"
->>>>>>> 46ee767614ecc4d366cb8b46e221b1bb2e4328fb
   simple_gesture_detector:
     dependency: transitive
     description:
