@@ -231,41 +231,35 @@ class _LoginPageState extends State<LoginPage> {
           'email': emailTextEditingController.text,
         };
 
-        // _addUsers(userId);
+        users.doc(userId).get().then(
+          (doc) {
+            if (doc.exists) {
+              // old user
+              doc.reference.update(userData);
 
-        users.doc(userId).get().then((doc) {
-          if (doc.exists) {
-            // old user
-            doc.reference.update(userData);
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => MainPage(),
+                ),
+              );
+              displayToastMessage("Login Successful", context);
+            } else {
+              // new user
+              users.doc(user.uid).set(userData);
 
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => MainPage(),
-              ),
-            );
-            displayToastMessage("Login Successful", context);
-          } else {
-            // new user
-            users.doc(user.uid).set(userData);
-
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => MainPage(),
-              ),
-            );
-          }
-        },);
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => MainPage(),
+                ),
+              );
+            }
+          },
+        );
       }
     } catch (e) {
       print(e);
       print("Sign in not successful !");
       // better show an alert here
     }
-
-    // void _addUsers(String id) {
-    //   userRef.push().set({
-    //     'name': emailTextEditingController.text,
-    //   });
-    // }
   }
 }

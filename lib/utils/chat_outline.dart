@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Tabs/chat_room.dart';
+import 'package:flutter_application_1/Tabs/chats/chat_room.dart';
 import 'package:flutter_application_1/utils/themes.dart';
 
 class OutlineItem extends StatelessWidget {

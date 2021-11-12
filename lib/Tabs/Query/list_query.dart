@@ -38,7 +38,6 @@ class _ListQueriesState extends State<ListQueries> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyanAccent[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
@@ -60,16 +59,13 @@ class _ListQueriesState extends State<ListQueries> {
       ),
       //
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               15,
             ),
-            image: DecorationImage(
-              image: AssetImage("assets/images/queries8.jpg"),
-              fit: BoxFit.cover,
-            ),
+            color: Colors.cyan[200],
           ),
           child: FutureBuilder<QuerySnapshot>(
             future: ref.get(),

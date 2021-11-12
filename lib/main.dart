@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Tabs/Query/ask_query.dart';
 import 'package:flutter_application_1/Tabs/Query/list_query.dart';
 import 'package:flutter_application_1/Tabs/Query/query_submitted.dart';
-import 'package:flutter_application_1/Tabs/chat_screen.dart';
+import 'package:flutter_application_1/Tabs/chats/chat_screen.dart';
 import 'package:flutter_application_1/drawer_manager/Syllabus.dart';
 import 'package:flutter_application_1/drawer_manager/assignment.dart';
 import 'package:flutter_application_1/drawer_manager/notice_board.dart';
@@ -39,14 +39,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         themeMode: ThemeMode.light,
-        // theme: MyTheme.lightTheme(context),
-        // darkTheme: MyTheme.darkTheme(context),
         debugShowCheckedModeBanner: false,
         theme: lightThemeData(context),
         darkTheme: darkThemeData(context),
-        // initialRoute: MyRoutes.splashroutes,
-        // initialRoute: MyRoutes.loginroutes,
-        initialRoute: MyRoutes.mainpageroutes,
+        initialRoute: MyRoutes.loginroutes,
         home: Calendar(),
         routes: {
           "/splash": (context) => SplashScreen(),
@@ -63,10 +59,8 @@ class MyApp extends StatelessWidget {
           MyRoutes.calendarroutes: (context) => Calendar(),
           MyRoutes.askqueryroutes: (context) => AskQuery(),
           MyRoutes.listqueryroutes: (context) => ListQueries(),
-          // MyRoutes.addinforoutes: (context) => AddInfo(),
           MyRoutes.querySubmittedroutes: (context) => QuerySubmitted(),
           MyRoutes.userProfileroutes: (context) => UserProfile(),
-          // MyRoutes.roughPageroutes: (context) => RoughPage(),
           MyRoutes.roughLoginroutes: (context) => RLoginPage(),
           MyRoutes.roughPage3routes: (context) => HomePage(),
         },
