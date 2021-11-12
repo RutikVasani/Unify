@@ -171,8 +171,8 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 90,
-                              height: 65,
+                              width: 120,
+                              height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
@@ -188,20 +188,27 @@ class _CalendarState extends State<Calendar> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 18,
+                                    height: 10,
                                   ),
                                   Text(
                                     "Presents",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
+                                  ),
+                                  Divider(
+                                    color: Colors.white,
+                                    height: 18,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
                                   ),
                                   Text(
                                     "0 days",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 10,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ],
@@ -212,8 +219,8 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 90,
-                              height: 65,
+                              width: 120,
+                              height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
@@ -229,20 +236,27 @@ class _CalendarState extends State<Calendar> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 18,
+                                    height: 10,
                                   ),
                                   Text(
                                     "Absents",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
+                                  ),
+                                  Divider(
+                                    color: Colors.white,
+                                    height: 18,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
                                   ),
                                   Text(
                                     "0 days",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 10,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ],
@@ -253,8 +267,8 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 90,
-                              height: 65,
+                              width: 120,
+                              height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
@@ -270,20 +284,27 @@ class _CalendarState extends State<Calendar> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 18,
+                                    height: 10,
                                   ),
                                   Text(
                                     "Leaves",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
+                                  ),
+                                  Divider(
+                                    color: Colors.white,
+                                    height: 18,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
                                   ),
                                   Text(
                                     "0 days",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 10,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ],
@@ -292,6 +313,13 @@ class _CalendarState extends State<Calendar> {
                           ),
                         ],
                       ),
+                    ),
+                    Divider(
+                      color: Colors.blue,
+                      height: 18,
+                      thickness: 2,
+                      indent: 10,
+                      endIndent: 10,
                     ),
                     Row(
                       children: [
@@ -303,8 +331,8 @@ class _CalendarState extends State<Calendar> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: Container(
-                                  width: 90,
-                                  height: 65,
+                                  width: 120,
+                                  height: 90,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topCenter,
@@ -320,20 +348,27 @@ class _CalendarState extends State<Calendar> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: 18,
+                                        height: 10,
                                       ),
                                       Text(
                                         "Total Days",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 15,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.bold),
+                                      ),
+                                      Divider(
+                                        color: Colors.white,
+                                        height: 18,
+                                        thickness: 2,
+                                        indent: 10,
+                                        endIndent: 10,
                                       ),
                                       Text(
                                         "30 days",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 10,
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ],
@@ -344,8 +379,8 @@ class _CalendarState extends State<Calendar> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: Container(
-                                  width: 90,
-                                  height: 65,
+                                  width: 120,
+                                  height: 90,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topCenter,
@@ -361,20 +396,27 @@ class _CalendarState extends State<Calendar> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: 18,
+                                        height: 15,
                                       ),
                                       Text(
                                         "Holidays",
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 15,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold),
+                                      ),
+                                      Divider(
+                                        color: Colors.white,
+                                        height: 18,
+                                        thickness: 2,
+                                        indent: 10,
+                                        endIndent: 10,
                                       ),
                                       Text(
                                         "4 days",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 10,
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ],
@@ -387,8 +429,8 @@ class _CalendarState extends State<Calendar> {
                         Spacer(),
                         Image.asset(
                           "assets/images/piechart.png",
-                          width: 150,
-                          height: 150,
+                          width: 215,
+                          height: 215,
                         ),
                         SizedBox(
                           width: 20,

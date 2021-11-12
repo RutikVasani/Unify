@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightThemeData(context),
         darkTheme: darkThemeData(context),
-        initialRoute: MyRoutes.loginroutes,
+        initialRoute: MyRoutes.splashroutes,
         home: Calendar(),
         routes: {
           "/splash": (context) => SplashScreen(),
