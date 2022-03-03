@@ -21,7 +21,7 @@ class _ViewQueryState extends State<ViewQuery> {
   GlobalKey<FormState> key = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     title = widget.data['title'];
     studentId = widget.data['studentId'];
     des = widget.data['description'];

@@ -171,7 +171,7 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 120,
+                              width: 100,
                               height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -219,7 +219,7 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 120,
+                              width: 100,
                               height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -267,7 +267,7 @@ class _CalendarState extends State<Calendar> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Container(
-                              width: 120,
+                              width: 100,
                               height: 90,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -331,7 +331,7 @@ class _CalendarState extends State<Calendar> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: Container(
-                                  width: 120,
+                                  width: 100,
                                   height: 90,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
@@ -379,7 +379,7 @@ class _CalendarState extends State<Calendar> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: Container(
-                                  width: 120,
+                                  width: 100,
                                   height: 90,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
@@ -429,8 +429,8 @@ class _CalendarState extends State<Calendar> {
                         Spacer(),
                         Image.asset(
                           "assets/images/piechart.png",
-                          width: 215,
-                          height: 215,
+                          width: 185,
+                          height: 185,
                         ),
                         SizedBox(
                           width: 20,

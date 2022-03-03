@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                     boxShadow: [
                       //BoxShadow
                       BoxShadow(
-                        color: Colors.blue.shade200,
+                        color: Color.fromARGB(255, 58, 156, 236),
                         offset: const Offset(0.0, 5.0),
                         blurRadius: 10.0,
                         spreadRadius: 3.0,
